@@ -1,0 +1,11 @@
+{
+    "bot": {
+        "key": "your bot key here",
+        "prefix": "!",
+        "name": "Bot Name"
+    },
+    "server": {
+        "aboutUs": "About The Server",
+        "leadingTeam": ["@Darius#0537", "@DsYr_Frequencyツ#3610", "@Flo Zerfix#1986", "@santiiii#5885", "@Young Glaukio#9922", "!CHANGE THIS WITH YOUR MODS!"]
+    }
+}
