@@ -16,10 +16,14 @@ It is recommended that you run your Discord bot in a cloud server, to keep it ru
 
 To start the *Discord Bot*, run the following;
 ```sh
-$ node index.js
+$ node index.js // make sure you have nodejs installed!
 ```
 
 Then your bot is ready!
 
 ## Commands
 In your server, run `!help` and you will see a list of commands!
+
+## Roles
+
+To run Admin/Moderator commands, you need the "`+`" role or the "`Moderator`" role in the Discord Server, and make sure you also have a "`Community`" role, the bot auto assigns it when a member joins, and with that role you can run the basic commands. Look at `/main.js` for more.
