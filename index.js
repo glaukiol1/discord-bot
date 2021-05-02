@@ -9,7 +9,7 @@ var name = data.bot.name;
 
 bot.on('message', message => {
   let args = message.content.substring(prefix.length).split(' ')
-
+  if (message.content[0]===prefix) {
   switch (args[0]) {
     case 'dm':
       if (
@@ -268,10 +268,13 @@ bot.on('message', message => {
         targetP.roles.remove(roleA)
       }
   }
+  }
+  
 })
 
 bot.on('message', message => {
   let args = message.content.substring(prefix.length).split(' ')
+  if (message.content[0]===prefix) {
   switch (args[0]) {
     case 'unmute':
       if (
@@ -413,6 +416,8 @@ bot.on('message', message => {
         .create(args[1], { type: 'voice' })
         .then(() => message.channel.send(`Voice channel created!`))
   }
+  }
+  
 })
 
 //bot.on('message', message => {
@@ -487,8 +492,7 @@ bot.on('guildMemberRemove', member => {
 
 bot.on('ready', () => {
   console.log('Bot is online!')
-  bot.user.setActivity('Fortnite & clapping bots')
+  bot.user.setActivity('Moderating, listening for '+prefix)
 })
 
 bot.login(token)
-// ('Fortnite & clapping bots')
