@@ -22,7 +22,7 @@ $ node index.js // make sure you have nodejs installed!
 Then your bot is ready!
 
 ## Commands
-In your server, run `!help` and you will see a list of commands!
+In your server, run `!list` and you will see a list of commands!
 
 ## Roles
 
