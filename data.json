@@ -1,0 +1,11 @@
+{
+    "bot": {
+        "key": "ODg1NjA0MjEwMjcwNDEyODQw.YTpdMQ.SNVniUaawT7zbR-vM8h5gxvsaiY",
+        "prefix": "!",
+        "name": "Glaukio Bot"
+    },
+    "server": {
+        "aboutUs": "About The Server",
+        "leadingTeam": ["@lui#5580"]
+    }
+}
