@@ -194,64 +194,6 @@ const me = (message, args) => {
 	message.channel.send(embed)
 }
 
-const mute = (message, args) => {
-	if (
-		!message.member.hasPermission('ADMINISTRATOR')
-	) {
-		return message.channel.send(
-			'You do not have the required role to run this command!'
-		)
-	} else {
-		let person = message.guild.member(
-			message.mentions.users.first() ||
-			message.guild.members.cache.get(args[1])
-		)
-		if (!person) return message.reply('I cant find that member!')
-
-		let mainRole = message.guild.roles.cache.find(
-			role => role.name === 'Community'
-		)
-		let muteRole = message.guild.roles.cache.find(
-			role => role.name === 'Muted'
-		)
-
-		let time = args[2]
-		if (!time) {
-			return message.reply('Time arg is missing')
-		}
-		person.roles.remove(mainRole)
-		person.roles.add(muteRole)
-		const date = new Date()
-		const log = message.guild.channels.cache.find(
-			channel => channel.name === 'bot-log'
-		)
-		const EmbedLogMute = new Discord.MessageEmbed()
-			.setTitle('User Muted')
-			.setDescription(`${person} was struck by the mute-hammer!`)
-			.addField('User Muted:', person)
-			.addField('Mod Responsible:', `@${message.member.user.tag}`)
-			.addField('Time Muted:', ms(ms(time, true)))
-			.setFooter(date)
-		log.send(EmbedLogMute)
-		message.channel.send(
-			`!dm @${person} You have been muted for ${ms(ms(time, true))}`
-		)
-
-		setTimeout(() => {
-			person.roles.add(mainRole)
-			person.roles.remove(muteRole)
-			message.channel.send(`@${person.user.tag} now has been unmuted!`)
-			const auto = new Discord.MessageEmbed()
-				.setTitle('User Unmuted')
-				.setDescription(`${person} was struck by the un-mute-hammer!`)
-				.addField('User Unmuted:', person)
-				.addField('Mod Responsible:', `This case was auto-resolved`)
-				.setFooter(date)
-			log.send(auto)
-		}, ms(time))
-	}
-}
-
 const kick = (message, args) => {
 	if (
 		!message.member.hasPermission('ADMINISTRATOR')
@@ -395,43 +337,7 @@ bot.on('message', message => {
 				}
 				break;
 			case 'unmute':
-				if (
-
-					!message.member.hasPermission('ADMINISTRATOR')
-				) {
-					return message.channel.send(
-						'You do not have the required role to run this command!'
-					)
-				} else {
-					let person = message.guild.member(
-						message.mentions.users.first() ||
-						message.guild.members.cache.get(args[1])
-					)
-					if (!person) return message.reply('I cant find that member!')
-
-					let mainRole = message.guild.roles.cache.find(
-						role => role.name === 'Community'
-					)
-					let muteRole = message.guild.roles.cache.find(
-						role => role.name === 'Muted'
-					)
-
-					person.roles.remove(muteRole)
-					person.roles.add(mainRole)
-					const logChannel = message.guild.channels.cache.find(
-						channel => channel.name === 'bot-log'
-					)
-					const date = new Date()
-					const EmbedLogUnMute = new Discord.MessageEmbed()
-						.setTitle('User Unmuted')
-						.setDescription(`${person} was struck by the un-mute-hammer!`)
-						.addField('User Unmuted:', person)
-						.addField('Mod Responsible:', `@${message.member.user.tag}`)
-						.setFooter(date)
-					logChannel.send(EmbedLogUnMute)
-
-					message.channel.send(`@${person.user.tag} got unmuted!`)
-				}
+				unmute(message,args)
 				break
 			case 'poll':
 				if (
