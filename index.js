@@ -249,9 +249,7 @@ const help = (message, args) => {
 
 bot.on('message', message => {
 	let args = message.content.substring(prefix.length).split(' ');
-	if (!message.guild) {
-		message.channel.send('My DM feature is still in development. Im sorry, I can\'t respond.')
-	} else {
+	if (message.guild) {
 		if (message.content[0] === prefix) {
 			switch (args[0]) {
 				case 'mute':
