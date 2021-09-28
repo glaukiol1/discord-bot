@@ -22,9 +22,6 @@ const mute = (message, args) => {
 		)
 		if (!person) return message.reply('I cant find that member!')
 
-		let mainRole = message.guild.roles.cache.find(
-			role => role.name === 'Community'
-		)
 		let muteRole = message.guild.roles.cache.find(
 			role => role.name === 'Muted'
 		)
@@ -33,11 +30,10 @@ const mute = (message, args) => {
 		if (!time) {
 			return message.reply('Time arg is missing')
 		}
-		person.roles.remove(mainRole)
 		person.roles.add(muteRole)
 		const date = new Date()
 		const log = message.guild.channels.cache.find(
-			channel => channel.name === 'general'
+			channel => channel.name === 'glaukio-logs'
 		)
 		const EmbedLogMute = new Discord.MessageEmbed()
 			.setTitle('User Muted')
@@ -52,7 +48,6 @@ const mute = (message, args) => {
 		)
 
 		setTimeout(() => {
-			person.roles.add(mainRole)
 			person.roles.remove(muteRole)
 			message.channel.send(`@${person.user.tag} now has been unmuted!`)
 			const auto = new Discord.MessageEmbed()
@@ -90,7 +85,7 @@ const unmute = (message, args) => {
 		person.roles.remove(muteRole)
 		person.roles.add(mainRole)
 		const logChannel = message.guild.channels.cache.find(
-			channel => channel.name === 'general'
+			channel => channel.name === 'glaukio-logs'
 		)
 		const date = new Date()
 		const EmbedLogUnMute = new Discord.MessageEmbed()
@@ -146,7 +141,7 @@ const ban = (message, args) => {
 					.then(() => {
 						const date = new Date()
 						const log = message.guild.channels.cache.find(
-							channel => channel.name === 'bot-log'
+							channel => channel.name === 'glaukio-log'
 						)
 						const EmbedLog = new Discord.MessageEmbed()
 							.setTitle('User Banned')
@@ -168,7 +163,7 @@ const ban = (message, args) => {
 
 const clear = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTRATOR')
+		!message.member.hasPermission('ADMINISTATOR')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -292,7 +287,7 @@ bot.on('message', message => {
 				kick(message, args)
 				break
 			case 'help':
-				help(message,args)
+				help(message, args)
 				break
 			case 'addRole':
 				if (
@@ -337,7 +332,7 @@ bot.on('message', message => {
 				}
 				break;
 			case 'unmute':
-				unmute(message,args)
+				unmute(message, args)
 				break
 			case 'poll':
 				if (
