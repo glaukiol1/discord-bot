@@ -114,7 +114,6 @@ const dm = (message, args) => {
 		const mentionMessage = message.content.slice(3)
 		mentionDm.send(mentionMessage)
 		message.delete()
-		message.channel.send('DM sent!')
 	}
 }
 
