@@ -10,7 +10,7 @@ var name = data.bot.name;
 
 const mute = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTRATOR')
+		!message.member.hasPermission('MANAGE_ROLES')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -63,7 +63,7 @@ const mute = (message, args) => {
 
 const unmute = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTRATOR')
+		!message.member.hasPermission('MANAGE_ROLES')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -103,7 +103,7 @@ const unmute = (message, args) => {
 
 const dm = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTRATOR')
+		!message.member.hasPermission('MANAGE_CHANNELS')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -119,7 +119,7 @@ const dm = (message, args) => {
 
 const ban = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTRATOR')
+		!message.member.hasPermission('BAN_MEMBERS')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -162,7 +162,7 @@ const ban = (message, args) => {
 
 const clear = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTATOR')
+		!message.member.hasPermission('MANAGE_MESSAGES')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -190,7 +190,7 @@ const me = (message, args) => {
 
 const kick = (message, args) => {
 	if (
-		!message.member.hasPermission('ADMINISTRATOR')
+		!message.member.hasPermission('KICK_MEMBERS')
 	) {
 		return message.channel.send(
 			'You do not have the required role to run this command!'
@@ -291,7 +291,7 @@ bot.on('message', message => {
 			case 'addRole':
 				if (
 
-					!message.member.hasPermission('ADMINISTRATOR')
+					!message.member.hasPermission('MANAGE_ROLES')
 				) {
 					return message.channel.send(
 						`You do not have the required role to run this command!`
@@ -312,7 +312,7 @@ bot.on('message', message => {
 			case 'removeRole':
 				if (
 
-					!message.member.hasPermission('ADMINISTRATOR')
+					!message.member.hasPermission('MANAGE_ROLES')
 				) {
 					return message.channel.send(
 						'You do not have the required role to run this command!'
@@ -336,7 +336,7 @@ bot.on('message', message => {
 			case 'poll':
 				if (
 
-					!message.member.hasPermission('ADMINISTRATOR')
+					!message.member.hasPermission('MANAGE_CHANNELS')
 				) {
 					return message.channel.send(
 						'You do not have the required role to run this command!'
@@ -362,7 +362,7 @@ bot.on('message', message => {
 			case 'warn':
 				if (
 
-					!message.member.hasPermission('ADMINISTRATOR')
+					!message.member.hasPermission('MANAGE_ROLES')
 				) {
 					return message.channel.send(
 						'You do not have the required role to run this command!'
