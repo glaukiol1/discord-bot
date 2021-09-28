@@ -383,9 +383,9 @@ bot.on('message', message => {
 			}
 		}
 	} else {
-		message.channel.send('Im sorry, my DMs are still in experimental use. I can only send you the help page for now!')
-		help(message,args)
-		return;
+		help(message,args);
+		
+		return message.channel.send('Im sorry, my DMs are still in experimental use. I can only send you the help page for now!');
 	}
 })
 // bot.on('message', message => {
