@@ -248,137 +248,141 @@ const help = (message, args) => {
 }
 
 bot.on('message', message => {
-	let args = message.content.substring(prefix.length).split(' ')
-	if (message.content[0] === prefix) {
-		switch (args[0]) {
-			case 'mute':
-				mute(message, args)
-				break
-			case 'unmute':
-				unmute(message, args)
-				break
-			case 'dm':
-				dm(message, args)
-				break
-			case 'ban':
-				ban(message, args)
-				break
-			case 'ping':
-				message.channel.send('pong!')
-				break
-			case 'info':
-				if (args[1] === 'discord') {
-					message.channel.send(aboutUs)
-				} else {
-					message.reply('Invalid Args')
-				}
-				break
-			case 'clear':
-				clear(message, args)
-				break
-			case 'me':
-				me(message, args)
-				break
-			case 'mute':
-				mute(message, args)
-				break
-			case 'kick':
-				kick(message, args)
-				break
-			case 'help':
-				help(message, args)
-				break
-			case 'addRole':
-				if (
-
-					!message.member.hasPermission('MANAGE_ROLES')
-				) {
-					return message.channel.send(
-						`You do not have the required role to run this command!`
-					)
-				} else {
-					if (!args[2]) return message.channel.send('Invalid Args')
-					let targetP = message.guild.member(
-						message.mentions.users.first() ||
-						message.guild.members.cache.get(args[1])
-					)
-					let roleA = message.guild.roles.cache.find(r => r.name === args[2])
-					if (!roleA)
-						return message.channel.send(`I cant find the role: ${roleA}`)
-					if (!targetP) return message.channel.send(`I cant find the person!`)
-					targetP.roles.add(roleA)
-				}
-				break
-			case 'removeRole':
-				if (
-
-					!message.member.hasPermission('MANAGE_ROLES')
-				) {
-					return message.channel.send(
-						'You do not have the required role to run this command!'
-					)
-				} else {
-					if (!args[2]) return message.channel.send('Invalid Args')
-					let targetP = message.guild.member(
-						message.mentions.users.first() ||
-						message.guild.members.cache.get(args[1])
-					)
-					let roleA = message.guild.roles.cache.find(r => r.name === args[2])
-					if (!roleA)
-						return message.channel.send(`I cant find the role: ${roleA}`)
-					if (!targetP) return message.channel.send(`I cant find the person!`)
-					targetP.roles.remove(roleA)
-				}
-				break;
-			case 'unmute':
-				unmute(message, args)
-				break
-			case 'poll':
-				if (
-
-					!message.member.hasPermission('MANAGE_CHANNELS')
-				) {
-					return message.channel.send(
-						'You do not have the required role to run this command!'
-					)
-				} else {
-					const Embed = new Discord.MessageEmbed()
-						.setColor(0xffc300)
-						.setTitle('Initiate Poll')
-						.setDescription('!poll to initiate a simple yes or no poll')
-
-					if (!args[1]) {
-						message.channel.send(Embed)
-						break
-					}
-					let msgArgs = args.slice(1).join(' ')
-					message.channel.send(`**${msgArgs}**`).then(messageReaction => {
-						messageReaction.react('👍')
-						messageReaction.react('👎')
-					})
-				}
-				message.delete()
-				break
-			case 'warn':
-				if (
-
-					!message.member.hasPermission('MANAGE_ROLES')
-				) {
-					return message.channel.send(
-						'You do not have the required role to run this command!'
-					)
-				} else {
-					let memberWarn = message.mentions.users.first()
-					if (!memberWarn) {
-						message.channel.send('Invalid Args')
+	let args = message.content.substring(prefix.length).split(' ');
+	if (!message.guild) {
+		message.channel.send('My DM feature is still in development. Im sorry, I can\'t respond.')
+	} else {
+		if (message.content[0] === prefix) {
+			switch (args[0]) {
+				case 'mute':
+					mute(message, args)
+					break
+				case 'unmute':
+					unmute(message, args)
+					break
+				case 'dm':
+					dm(message, args)
+					break
+				case 'ban':
+					ban(message, args)
+					break
+				case 'ping':
+					message.channel.send('pong!')
+					break
+				case 'info':
+					if (args[1] === 'discord') {
+						message.channel.send(aboutUs)
 					} else {
-						message.channel.send(`!mute ${memberWarn} 5m`)
-						message.channel.send(
-							`!dm ${memberWarn} You have been warned!`
-						)
+						message.reply('Invalid Args')
 					}
-				}
-				break
+					break
+				case 'clear':
+					clear(message, args)
+					break
+				case 'me':
+					me(message, args)
+					break
+				case 'mute':
+					mute(message, args)
+					break
+				case 'kick':
+					kick(message, args)
+					break
+				case 'help':
+					help(message, args)
+					break
+				case 'addRole':
+					if (
+
+						!message.member.hasPermission('MANAGE_ROLES')
+					) {
+						return message.channel.send(
+							`You do not have the required role to run this command!`
+						)
+					} else {
+						if (!args[2]) return message.channel.send('Invalid Args')
+						let targetP = message.guild.member(
+							message.mentions.users.first() ||
+							message.guild.members.cache.get(args[1])
+						)
+						let roleA = message.guild.roles.cache.find(r => r.name === args[2])
+						if (!roleA)
+							return message.channel.send(`I cant find the role: ${roleA}`)
+						if (!targetP) return message.channel.send(`I cant find the person!`)
+						targetP.roles.add(roleA)
+					}
+					break
+				case 'removeRole':
+					if (
+
+						!message.member.hasPermission('MANAGE_ROLES')
+					) {
+						return message.channel.send(
+							'You do not have the required role to run this command!'
+						)
+					} else {
+						if (!args[2]) return message.channel.send('Invalid Args')
+						let targetP = message.guild.member(
+							message.mentions.users.first() ||
+							message.guild.members.cache.get(args[1])
+						)
+						let roleA = message.guild.roles.cache.find(r => r.name === args[2])
+						if (!roleA)
+							return message.channel.send(`I cant find the role: ${roleA}`)
+						if (!targetP) return message.channel.send(`I cant find the person!`)
+						targetP.roles.remove(roleA)
+					}
+					break;
+				case 'unmute':
+					unmute(message, args)
+					break
+				case 'poll':
+					if (
+
+						!message.member.hasPermission('MANAGE_CHANNELS')
+					) {
+						return message.channel.send(
+							'You do not have the required role to run this command!'
+						)
+					} else {
+						const Embed = new Discord.MessageEmbed()
+							.setColor(0xffc300)
+							.setTitle('Initiate Poll')
+							.setDescription('!poll to initiate a simple yes or no poll')
+
+						if (!args[1]) {
+							message.channel.send(Embed)
+							break
+						}
+						let msgArgs = args.slice(1).join(' ')
+						message.channel.send(`**${msgArgs}**`).then(messageReaction => {
+							messageReaction.react('👍')
+							messageReaction.react('👎')
+						})
+					}
+					message.delete()
+					break
+				case 'warn':
+					if (
+
+						!message.member.hasPermission('MANAGE_ROLES')
+					) {
+						return message.channel.send(
+							'You do not have the required role to run this command!'
+						)
+					} else {
+						let memberWarn = message.mentions.users.first()
+						if (!memberWarn) {
+							message.channel.send('Invalid Args')
+						} else {
+							message.channel.send(`!mute ${memberWarn} 5m`)
+							message.channel.send(
+								`!dm ${memberWarn} You have been warned!`
+							)
+						}
+					}
+					break
+			}
 		}
 	}
 })
