@@ -71,7 +71,7 @@ const unmute = (message, args) => {
 	} else {
 		let person = message.guild.member(
 			message.mentions.users.first() ||
-			message.guild.members.cache.get(args[1])
+			message.guild.members.cache.get(args[1]) 
 		)
 		if (!person) return message.reply('I cant find that member!')
 
@@ -305,6 +305,8 @@ bot.on('message', message => {
 							return message.channel.send(`I cant find the role: ${roleA}`)
 						if (!targetP) return message.channel.send(`I cant find the person!`)
 						targetP.roles.add(roleA)
+							.then(()=>{message.delete();return message.channel.send(`Added Role!`)})
+							.catch((error)=>{message.delete(); return message.channel.send(`I could not assign this role! Reason: ${error}`)})
 					}
 					break
 				case 'removeRole':
