@@ -75,15 +75,12 @@ const unmute = (message, args) => {
 		)
 		if (!person) return message.reply('I cant find that member!')
 
-		let mainRole = message.guild.roles.cache.find(
-			role => role.name === 'Community'
-		)
 		let muteRole = message.guild.roles.cache.find(
 			role => role.name === 'Muted'
 		)
 
 		person.roles.remove(muteRole)
-		person.roles.add(mainRole)
+
 		const logChannel = message.guild.channels.cache.find(
 			channel => channel.name === 'glaukio-logs'
 		)
