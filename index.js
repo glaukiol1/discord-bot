@@ -370,8 +370,8 @@ bot.on('message', message => {
 							.addField(`:a:`, `Yes`)
 							.addField(`:b:`, `No`);
 						message.channel.send(PollEmbed).then(messageReaction => {
-							messageReaction.react('👍')
-							messageReaction.react('👎')
+							messageReaction.react(':a:')
+							messageReaction.react(':b:')
 						})
 					}
 					message.delete()
