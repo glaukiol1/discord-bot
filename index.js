@@ -367,11 +367,11 @@ bot.on('message', message => {
 						const PollEmbed = new Discord.MessageEmbed()
 							.setColor(0xffc300)
 							.setTitle(`**${msgArgs}**`)
-							.addField(`:a:`, `Yes`)
-							.addField(`:b:`, `No`);
+							.addField(`:one:`, `Yes`)
+							.addField(`:two:`, `No`);
 						message.channel.send(PollEmbed).then(messageReaction => {
-							messageReaction.react(':a:')
-							messageReaction.react(':b:')
+							messageReaction.react(':one:')
+							messageReaction.react(':two:')
 						})
 					}
 					message.delete()
