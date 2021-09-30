@@ -13,7 +13,7 @@ const mute = (message, args) => {
 		!message.member.hasPermission('MANAGE_ROLES')
 	) {
 		return message.channel.send(
-			'You do not have the required role to run this command!'
+			'You do not have the required premissions to run this command!'
 		)
 	} else {
 		let person = message.guild.member(
@@ -66,7 +66,7 @@ const unmute = (message, args) => {
 		!message.member.hasPermission('MANAGE_ROLES')
 	) {
 		return message.channel.send(
-			'You do not have the required role to run this command!'
+			'You do not have the required premissions to run this command!'
 		)
 	} else {
 		let person = message.guild.member(
@@ -103,7 +103,7 @@ const dm = (message, args) => {
 		!message.member.hasPermission('MANAGE_CHANNELS')
 	) {
 		return message.channel.send(
-			'You do not have the required role to run this command!'
+			'You do not have the required premissions to run this command!'
 		)
 	} else {
 		const mentionDm = message.mentions.users.first()
@@ -119,7 +119,7 @@ const ban = (message, args) => {
 		!message.member.hasPermission('BAN_MEMBERS')
 	) {
 		return message.channel.send(
-			'You do not have the required role to run this command!'
+			'You do not have the required premissions to run this command!'
 		)
 	} else {
 		if (!args[1]) message.channel.send('Invalid Args')
@@ -162,7 +162,7 @@ const clear = (message, args) => {
 		!message.member.hasPermission('MANAGE_MESSAGES')
 	) {
 		return message.channel.send(
-			'You do not have the required role to run this command!'
+			'You do not have the required premissions to run this command!'
 		)
 	} else {
 		if (args[1]) {
@@ -190,7 +190,7 @@ const kick = (message, args) => {
 		!message.member.hasPermission('KICK_MEMBERS')
 	) {
 		return message.channel.send(
-			'You do not have the required role to run this command!'
+			'You do not have the required premissions to run this command!'
 		)
 	} else {
 		if (!args[1]) message.channel.send('Invalid Args')
@@ -244,6 +244,18 @@ const help = (message, args) => {
 	message.channel.send(embedList)
 }
 
+const c_prefix = (message,args) => {
+	if (
+		!message.member.hasPermission('ADMINISTATOR')
+	) {
+		return message.channel.send(
+			'You do not have the required premissions to run this command!'
+		)
+	} {
+		
+	}
+}
+
 bot.on('message', message => {
 	let args = message.content.substring(prefix.length).split(' ');
 	if (message.guild) {
@@ -292,7 +304,7 @@ bot.on('message', message => {
 						!message.member.hasPermission('MANAGE_ROLES')
 					) {
 						return message.channel.send(
-							`You do not have the required role to run this command!`
+							`You do not have the required premissions to run this command!`
 						)
 					} else {
 						if (!args[2]) return message.channel.send('Invalid Args')
@@ -315,7 +327,7 @@ bot.on('message', message => {
 						!message.member.hasPermission('MANAGE_ROLES')
 					) {
 						return message.channel.send(
-							'You do not have the required role to run this command!'
+							'You do not have the required premissions to run this command!'
 						)
 					} else {
 						if (!args[2]) return message.channel.send('Invalid Args')
@@ -339,7 +351,7 @@ bot.on('message', message => {
 						!message.member.hasPermission('MANAGE_CHANNELS')
 					) {
 						return message.channel.send(
-							'You do not have the required role to run this command!'
+							'You do not have the required premissions to run this command!'
 						)
 					} else {
 						const Embed = new Discord.MessageEmbed()
@@ -352,7 +364,12 @@ bot.on('message', message => {
 							break
 						}
 						let msgArgs = args.slice(1).join(' ')
-						message.channel.send(`**${msgArgs}**`).then(messageReaction => {
+						const PollEmbed = new Discord.MessageEmbed()
+							.setColor(0xffc300)
+							.setTitle(`**${msgArgs}**`)
+							.setDescription(`:a: Yes`)
+							.setDescription(`:b: No`);
+						message.channel.send(PollEmbed).then(messageReaction => {
 							messageReaction.react('👍')
 							messageReaction.react('👎')
 						})
@@ -365,7 +382,7 @@ bot.on('message', message => {
 						!message.member.hasPermission('MANAGE_ROLES')
 					) {
 						return message.channel.send(
-							'You do not have the required role to run this command!'
+							'You do not have the required premissions to run this command!'
 						)
 					} else {
 						let memberWarn = message.mentions.users.first()
