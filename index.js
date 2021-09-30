@@ -370,7 +370,9 @@ bot.on('message', message => {
 							.addField(`:one:`, `Yes`)
 							.addField(`:two:`, `No`);
 						message.channel.send(PollEmbed).then(messageReaction => {
-							messageReaction.react('1️⃣')
+							messageReaction.react('1️⃣').catch(error=>{
+								message.channel.send(error)
+							})
 							messageReaction.react('2️⃣')
 						})
 					}
