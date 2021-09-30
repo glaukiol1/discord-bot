@@ -176,11 +176,11 @@ const clear = (message, args) => {
 const me = (message, args) => {
 	const embed = new Discord.MessageEmbed()
 		.setTitle('User Info')
-		.addField('Player Name', message.author.username)
+		.addField('Username', message.author.username)
 		.addField('Current Server', message.guild.name)
 		.addField('Role (Highest)', message.member.roles.highest)
 		.setThumbnail(message.author.avatarURL())
-		.setFooter(`Came to you by @${name}!`)
+		.setFooter(`Came to you by @Gaga Bot!`)
 		.setColor(0xf1c40f)
 	message.channel.send(embed)
 }
