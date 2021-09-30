@@ -265,6 +265,8 @@ const c_prefix = (message,args) => {
 			}
 		}
 		dataFile.update();
+		message.delete();
+		message.channel.send(`New prefix: **${args[1]}**. Please note that this is still **experimental**, meaning that if your new prefix does not work, go back and try "!".`)
 	}
 }
 
