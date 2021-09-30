@@ -248,7 +248,7 @@ const help = (message, args) => {
 
 const c_prefix = (message,args) => {
 	if (
-		!message.member.hasPermission('ADMINISTATOR')
+		!message.member.hasPermission('ADMINISTRATOR')
 	) {
 		return message.channel.send(
 			'You do not have the required premissions to run this command!'
