@@ -1,7 +1,7 @@
 const data = require('./data.json');
 const Discord = require('discord.js')
 const bot = new Discord.Client()
-const aboutUs = data.server.aboutUs;
+var aboutUs = data.server.aboutUs;
 const token = data.bot.key;
 const ms = require('ms')
 var prefix = data.bot.prefix;
@@ -234,7 +234,7 @@ const help = (message, args) => {
 		.addField('Prefix:', prefix)
 		.addField(
 			'Admin Commands:',
-			'unmute, ban, kick, mute, clear, warn, poll, dm, addRole, removeRole'
+			'unmute, ban, kick, mute, clear, warn, poll, dm, addRole, removeRole, prefix'
 		)
 		.addField(
 			'Public commands:',

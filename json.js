@@ -8,7 +8,7 @@ module.exports = class json {
         this.update = () => {
             fs.writeFileSync(
                 path.join(__dirname, this.filename),
-                JSON.stringify(data)
+                JSON.stringify(this.data)
             );
         }
     }
