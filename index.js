@@ -7,6 +7,8 @@ const ms = require('ms')
 var prefix = data.bot.prefix;
 var name = data.bot.name;
 
+const json = require('./json');
+
 
 const mute = (message, args) => {
 	if (
@@ -252,15 +254,39 @@ const c_prefix = (message,args) => {
 			'You do not have the required premissions to run this command!'
 		)
 	} {
-		
+		const dataFile = new json('server_data.json');
+		if (!args[1]) return message.channel.send('Specify a new prefix!');
+		if (dataFile.data.data[message.guild.name]) {
+			dataFile.data.data[message.guild.name].prefix = args[1]
+		} else {
+			dataFile.data.data[message.guild.name] = {
+				prefix: args[1],
+				aboutUs: `${message.guild.name} | Server`
+			}
+		}
+		dataFile.update();
 	}
 }
 
 bot.on('message', message => {
+	const dataFile = new json('server_data.json');
+	if (dataFile.data.data[message.guild.name]) {
+		prefix = dataFile.data.data[message.guild.name].prefix;
+	} else {
+		prefix = '!'
+	}
+	if (dataFile.data.data[message.guild.name]) {
+		aboutUs = dataFile.data.data[message.guild.name].aboutUs;
+	} else {
+		aboutUs = 'Nothing to show here!'
+	}
 	let args = message.content.substring(prefix.length).split(' ');
 	if (message.guild) {
 		if (message.content[0] === prefix) {
 			switch (args[0]) {
+				case 'prefix':
+					c_prefix(message,args);
+					break;
 				case 'mute':
 					mute(message, args)
 					break
@@ -368,12 +394,14 @@ bot.on('message', message => {
 							.setColor(0xffc300)
 							.setTitle(`**${msgArgs}**`)
 							.addField(`:one:`, `Yes`)
-							.addField(`:two:`, `No`);
+							.addField(`:two:`, `No`)
 						message.channel.send(PollEmbed).then(messageReaction => {
 							messageReaction.react('1️⃣').catch(error=>{
-								message.channel.send(error)
+								message.channel.send('Oops, there has been an error:  '+error)
 							})
-							messageReaction.react('2️⃣')
+							messageReaction.react('2️⃣').catch(error=>{
+								message.channel.send('Oops, there has been an error:  '+error)
+							})
 						})
 					}
 					message.delete()
